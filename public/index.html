@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Iran Local Exchanges List</title>
+	<title>Iran Local Exchanges Price List</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -25,6 +25,7 @@
 	
 	<div class="limiter" id="app">
 		<div class="container-table100">
+			<h1>Iran Local Exchanges Bitcoin Price</h1>
 			<div class="wrap-table100">
 
 				<div class="table100 ver3 m-b-110">
@@ -33,8 +34,8 @@
 							<thead>
 								<tr class="row100 head">
 									<th class="cell100 column1">Exchange Name</th>
-									<th class="cell100 column2">Buy</th>
-									<th class="cell100 column3">Sell</th>
+									<th class="cell100 column2">BTC Buy Price</th>
+									<th class="cell100 column3">BTC Sell Price</th>
 								</tr>
 							</thead>
 						</table>
@@ -46,8 +47,8 @@
 
 								<tr v-for="exchange in exchanges" :key="`exchange-${exchange.id}`" :id="`exchange-${exchange.id}`">
 									<td class="cell100 column1"><a :href="exchange.link" target="_blank">{{ exchange.name }}</a></td>
-									<td class="cell100 column2">{{ exchange.buy }}</td>
-									<td class="cell100 column3">{{ exchange.sell }}</td>
+									<td class="cell100 column2">{{ exchange.buy }} IRT</td>
+									<td class="cell100 column3">{{ exchange.sell }} IRT</td>
 								</tr>
 
 							</tbody>
