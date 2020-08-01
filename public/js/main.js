@@ -4,7 +4,7 @@ var app = new Vue({
 	el: '#app',
 
 	data: {
-		exchanges: {}
+		exchanges: []
 	},
 
 	mounted: function() {
@@ -20,14 +20,9 @@ var app = new Vue({
 
 	methods: {
 		updatePrices: function(exchanges) {
-			exchanges.forEach(exchange => {
-				console.log(exchange);
-				var initialObject = this.exchanges[exchange.id];
-				var ChangesObject = exchange;
-				var finalObject = {...initialObject, ...ChangesObject };
-				this.exchanges[exchange.id] = finalObject;
-				// this['exchanges'][exchange.id]['buy'] = exchange.buy;
-				// this.exchanges[exchange.id]['sell'] = exchange.sell;
+			this.exchanges = this.exchanges.map(item => {
+				let item2 = exchanges.find(i2 => i2.id === item.id);
+				return item2 ? { ...item, ...item2 } : item;
 			});
 		}
 	}

@@ -24,23 +24,11 @@ app.get('/', function(request, response) {
 })
 
 io.on('connection', function (socket) {
-    // io.emit('chat.message', Date.now() + ': new connection.');
-    // io.emit('exchanges.list', [
-    //     {id: 1, name: 'Nobitex', link: 'https://cryptopia.ir/go/nobitex'},
-    //     {id: 2, name: 'Exir', link: 'https://cryptopia.ir/go/exir'},
-    // ]);
-    io.emit('exchanges.list', {
-        1: {name: 'Nobitex', link: 'https://cryptopia.ir/go/nobitex'},
-        2: {name: 'Exir', link: 'https://cryptopia.ir/go/exir'},
-    });
     
-    // socket.on('chat.message', function(message) {
-    //     io.emit('chat.message', message);
-    // })
-
-    // socket.on('disconnect', function() {
-    //     io.emit('chat.message', Date.now() + ': user disconnected!');
-    // });
+    io.emit('exchanges.list', [
+        {id: 1, name: 'Nobitex', link: 'https://cryptopia.ir/go/nobitex'},
+        {id: 2, name: 'Exir', link: 'https://cryptopia.ir/go/exir'},
+    ]);
 
 })
 
@@ -48,11 +36,9 @@ function priceUpdate() {
     io.emit('exchanges.price', [
         {id: randInt(1,2), buy: randInt(10000, 20000), sell: randInt(5000, 10000)}
     ]);
-    console.log('price update');
 }
 
-setInterval(() => priceUpdate(), 1000)
-
+setInterval(() => priceUpdate(), 1000);
 
 
 function randInt(min, max) {

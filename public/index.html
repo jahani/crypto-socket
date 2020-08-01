@@ -43,19 +43,8 @@
 					<div class="table100-body js-pscroll">
 						<table>
 							<tbody>
-								<!-- <tr class="row100 body">
-									<td class="cell100 column1">Like a butterfly</td>
-									<td class="cell100 column2">Boxing</td>
-									<td class="cell100 column3">9:00 AM - 11:00 AM</td>
-								</tr> -->
 
-								<!-- <tr v-for="exchange in exchanges" :key="exchange.id" :id="'exchange-' + exchange.id">
-									<td class="cell100 column1"><a :href="exchange.link" target="_blank">{{ exchange.name }}</a></td>
-									<td class="cell100 column2">{{ exchange.buy }}</td>
-									<td class="cell100 column3">{{ exchange.sell }}</td>
-								</tr> -->
-
-								<tr v-for="(exchange, index) in exchanges" :key="`exchange-${index}`" :id="`exchange-${index}`">
+								<tr v-for="exchange in exchanges" :key="`exchange-${exchange.id}`" :id="`exchange-${exchange.id}`">
 									<td class="cell100 column1"><a :href="exchange.link" target="_blank">{{ exchange.name }}</a></td>
 									<td class="cell100 column2">{{ exchange.buy }}</td>
 									<td class="cell100 column3">{{ exchange.sell }}</td>
