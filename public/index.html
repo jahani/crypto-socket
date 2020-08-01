@@ -47,8 +47,8 @@
 
 								<tr v-for="exchange in exchanges" :key="`exchange-${exchange.id}`" :id="`exchange-${exchange.id}`">
 									<td class="cell100 column1"><a :href="exchange.link" target="_blank">{{ exchange.name }}</a></td>
-									<td class="cell100 column2">{{ exchange.buy }} IRT</td>
-									<td class="cell100 column3">{{ exchange.sell }} IRT</td>
+									<td class="cell100 column2">{{ exchange.buy }}<span v-if="exchange.buy"> IRT</span></td>
+									<td class="cell100 column3">{{ exchange.sell }}<span v-if="exchange.sell"> IRT</span></td>
 								</tr>
 
 							</tbody>
