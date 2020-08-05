@@ -16,7 +16,6 @@ glob.sync( './models/exchanges/*Exchange.js' ).forEach( function( file ) {
     exchangeClasses.push( require(path.resolve( file )) );
 });
 
-console.log( exchangeClasses );
 const exchanges = getExchangesData(exchangeClasses);
 
 server.listen(PORT, HOST);
@@ -35,6 +34,7 @@ io.on('connection', function (socket) {
 
 })
 
+setInterval(() => priceUpdate(), 3100);
 function priceUpdate() {
 
     for (let key = 0; key < exchangeClasses.length; key++) {
@@ -53,7 +53,6 @@ function priceUpdate() {
 
 }
 
-setInterval(() => priceUpdate(), 3100);
 
 function getExchangesData(exchangeClasses) {
     let exchanges = []
@@ -61,6 +60,5 @@ function getExchangesData(exchangeClasses) {
         const Exchange = exchangeClasses[key];
         exchanges.push( {...{id: key}, ...Exchange.Data()} );
     }
-    console.log(exchanges);
     return exchanges;
 }
