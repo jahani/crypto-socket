@@ -35,6 +35,7 @@ io.on('connection', function (socket) {
 })
 
 setInterval(() => priceUpdate(), 3100);
+
 function priceUpdate() {
 
     for (let key = 0; key < exchangeClasses.length; key++) {
@@ -52,7 +53,6 @@ function priceUpdate() {
     }
 
 }
-
 
 function getExchangesData(exchangeClasses) {
     let exchanges = []
