@@ -53,7 +53,7 @@ function priceUpdate() {
 
 }
 
-setInterval(() => priceUpdate(), 5000);
+setInterval(() => priceUpdate(), 3100);
 
 function getExchangesData(exchangeClasses) {
     let exchanges = []
