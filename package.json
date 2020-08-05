@@ -1,6 +1,12 @@
 {
-    "dependencies": {
-        "express": "^4.17.1",
-        "socket.io": "^2.3.0"
-    }
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "glob": "^7.1.6",
+    "socket.io": "^2.3.0"
+  }
 }

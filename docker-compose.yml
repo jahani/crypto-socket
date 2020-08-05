@@ -1,0 +1,16 @@
+version: '3'
+networks:
+  web:
+    external: true
+services:
+  crypto-socket:
+    networks:
+      - web
+    build: .
+    restart: unless-stopped     # or "always"
+    labels:
+      - "traefik.http.routers.crypto-socket.rule=Host(`socket.ebnes.ir`)"
+      - "traefik.http.routers.crypto-socket.entrypoints=websecure"
+      - "traefik.http.routers.crypto-socket.tls=true"
+      - "traefik.http.routers.crypto-socket.tls.certresolver=leresolver"
+      - "traefik.port=3000"
