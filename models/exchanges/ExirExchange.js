@@ -1,9 +1,10 @@
 const BaseExchange = require('../BaseExchange.js')
 
+const axios = require('axios');
+
 class ExirExchange extends BaseExchange {
-    // https://apidocs.exir.io/
-    // static name = 'Exir';
-    // static link = 'https://cryptopia.ir/go/exir'
+
+    // https://apidocs.exir.io/#orderbook
 
     static Data() {
         return {
@@ -13,19 +14,27 @@ class ExirExchange extends BaseExchange {
     }
 
     static FetchPrice() {
-        return FetchPriceHelper();   
-    }
-}
+        
+        return axios.get('https://api.exir.io/v1/orderbooks?symbol=btc-irt')
+        .then((res) => {
+            if (res.status != 200) {
+                throw (`statusCode: ${res.status}`);
+            }
 
-async function FetchPriceHelper() {
-    return {
-        buy: randInt(500, 599),
-        sell: randInt(400,499)
-    }
-}
+            return this.BestPrice(res.data);
+        });
 
-function randInt(min, max) {
-    return parseInt((Math.random() * (max - min + 1)), 10) + min;
+    }
+
+    static BestPrice(data) {
+        let buy = parseInt(data['btc-irt'].bids[0][0]);
+        let sell = parseInt(data['btc-irt'].asks[0][0]);
+        return {
+            buy: buy,
+            sell: sell
+        };
+    }
+
 }
 
 module.exports = ExirExchange
