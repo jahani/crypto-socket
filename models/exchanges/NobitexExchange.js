@@ -32,8 +32,8 @@ class NobitexExchange extends BaseExchange {
     }
     
     static BestPrice(data) {
-        let buy = parseInt(data.bids[0][0]);
-        let sell = parseInt(data.asks[0][0]);
+        let buy = parseInt(Number(data.bids[0][0])/10);
+        let sell = parseInt(Number(data.asks[0][0])/10);
         return {
             buy: buy,
             sell: sell
