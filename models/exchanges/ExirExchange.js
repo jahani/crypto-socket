@@ -5,10 +5,27 @@ class ExirExchange extends BaseExchange {
     // static name = 'Exir';
     // static link = 'https://cryptopia.ir/go/exir'
 
-    updatePrice() {
-        this.buy = 270000;
-        this.sell = 194000
+    static Data() {
+        return {
+            name: 'Exir',
+            link: 'https://cryptopia.ir/go/exir'
+        }
+    }
+
+    static FetchPrice() {
+        return FetchPriceHelper();   
     }
 }
 
-// module.exports = ExirExchange
+async function FetchPriceHelper() {
+    return {
+        buy: randInt(500, 599),
+        sell: randInt(400,499)
+    }
+}
+
+function randInt(min, max) {
+    return parseInt((Math.random() * (max - min + 1)), 10) + min;
+}
+
+module.exports = ExirExchange

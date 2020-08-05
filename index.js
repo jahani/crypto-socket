@@ -3,19 +3,24 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-// var glob = require( 'glob' );
-// var path = require( 'path' );
-// var classes = {}
-// require('./models/BaseExchange.js');
-// glob.sync( './models/exchanges/*Exchange.js' ).forEach( function( file ) {
-//     let className = file.split('/').pop().replace('.js','');
-//     // classes.push( className )
-//     classes[className] = require( path.resolve( file ) );
-//     // console.log(  );
-// });
-// var exchanges = [];
+// Constants
+const PORT = 3000;
+const HOST = '0.0.0.0';
 
-server.listen(3000);
+// Autoload Exchanges
+var glob = require( 'glob' );
+var path = require( 'path' );
+var exchangeClasses = [];
+glob.sync( './models/exchanges/*Exchange.js' ).forEach( function( file ) {
+    // let exchangeName = file.split('/').pop().replace('.js','');
+    exchangeClasses.push( require(path.resolve( file )) );
+});
+
+console.log( exchangeClasses );
+const exchanges = getExchangesData(exchangeClasses);
+
+server.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
 
 app.use('/', express.static(__dirname + '/public'));
 
@@ -23,24 +28,39 @@ app.get('/', function(request, response) {
     response.sendFile(__dirname + '/public/index.html');
 })
 
+
 io.on('connection', function (socket) {
-    
-    io.emit('exchanges.list', [
-        {id: 1, name: 'Nobitex', link: 'https://cryptopia.ir/go/nobitex'},
-        {id: 2, name: 'Exir', link: 'https://cryptopia.ir/go/exir'},
-    ]);
+
+    io.emit('exchanges.list', exchanges );
 
 })
 
 function priceUpdate() {
-    io.emit('exchanges.price', [
-        {id: randInt(1,2), buy: randInt(10000, 20000), sell: randInt(5000, 10000)}
-    ]);
+
+    for (let key = 0; key < exchangeClasses.length; key++) {
+        const Exchange = exchangeClasses[key];
+        
+        try {
+            Exchange.FetchPrice().then(prices => {
+                io.emit('exchanges.price', [
+                    {...{id: key}, ...prices}
+                ]);
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
 }
 
-setInterval(() => priceUpdate(), 1000);
+setInterval(() => priceUpdate(), 5000);
 
-
-function randInt(min, max) {
-    return parseInt((Math.random() * (max - min + 1)), 10) + min;
+function getExchangesData(exchangeClasses) {
+    let exchanges = []
+    for (let key = 0; key < exchangeClasses.length; key++) {
+        const Exchange = exchangeClasses[key];
+        exchanges.push( {...{id: key}, ...Exchange.Data()} );
+    }
+    console.log(exchanges);
+    return exchanges;
 }
