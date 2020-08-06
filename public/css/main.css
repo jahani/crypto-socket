@@ -1,3 +1,38 @@
+/*//////////////////////////////////////////////////////////////////
+[ CUSTOM STYLES ]*/
+.white-text {
+  color: white;
+}
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ BACKGROUND ]*/
+
+.bg-image {
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -10;
+  display: block;
+
+  /* The image used */
+  background-image: url("./../images/background.jpg");
+
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 
 
 /*//////////////////////////////////////////////////////////////////
@@ -143,7 +178,7 @@ iframe {
 .container-table100 {
   width: 100%;
   min-height: 100vh;
-  background: #fff;
+  /*background: #fff;*/
 
   display: -webkit-box;
   display: -webkit-flex;
