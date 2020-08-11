@@ -51,7 +51,7 @@ var app = new Vue({
 		},
 
 		createChart: function() {
-			let labelColor = '#00ad5f';
+			let labelColor = '#808080';
 
 			let chart = am4core.create("chartdiv", am4charts.XYChart);
 
@@ -60,9 +60,11 @@ var app = new Vue({
 			categoryAxis.renderer.inversed = true;
 			categoryAxis.renderer.grid.template.location = 0;
 			categoryAxis.renderer.labels.template.fill = am4core.color(labelColor);
+			categoryAxis.renderer.grid.template.stroke = am4core.color(labelColor);
 
 			let valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
 			valueAxis.renderer.labels.template.fill = am4core.color(labelColor);
+			valueAxis.renderer.grid.template.stroke = am4core.color(labelColor);
 
 			let columnSeries = chart.series.push(new am4charts.ColumnSeries());
 			columnSeries.dataFields.categoryY = "name";
