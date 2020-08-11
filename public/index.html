@@ -19,6 +19,15 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--====== Global site tag (gtag.js) - Google Analytics ===========================================-->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-59154958-6"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-59154958-6');
+	</script>
 <!--===============================================================================================-->
 </head>
 <body>
@@ -36,8 +45,8 @@
 							<thead>
 								<tr class="row100 head">
 									<th class="cell100 column1">Exchange Name</th>
-									<th class="cell100 column2">BTC Buy Price</th>
 									<th class="cell100 column3">BTC Sell Price</th>
+									<th class="cell100 column2">BTC Buy Price</th>
 								</tr>
 							</thead>
 						</table>
@@ -49,8 +58,8 @@
 
 								<tr v-for="exchange in exchanges" :key="`exchange-${exchange.id}`" :id="`exchange-${exchange.id}`">
 									<td class="cell100 column1"><a :href="exchange.link" target="_blank">{{ exchange.name }}</a></td>
-									<td class="cell100 column2">{{ Number(exchange.buy).toLocaleString() }}<span v-if="exchange.buy"> IRT</span></td>
 									<td class="cell100 column3">{{ Number(exchange.sell).toLocaleString() }}<span v-if="exchange.sell"> IRT</span></td>
+									<td class="cell100 column2">{{ Number(exchange.buy).toLocaleString() }}<span v-if="exchange.buy"> IRT</span></td>
 								</tr>
 
 							</tbody>
