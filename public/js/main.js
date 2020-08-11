@@ -1,3 +1,7 @@
+// amCharts
+am4core.useTheme(am4themes_animated);
+
+// Socket + VueJS
 var socket = io();
 
 var app = new Vue({
@@ -9,13 +13,17 @@ var app = new Vue({
 
 	mounted: function() {
 
+		this.createChart();
+
 		socket.on('exchanges.list', function(exchanges) {
 			this.exchanges = exchanges;
 		}.bind(this));
 
 		socket.on('exchanges.price', function(exchanges) {		
 			this.updatePrices(exchanges);
+			this.updateChart();
 		}.bind(this));
+
 	},
 
 	methods: {
@@ -24,11 +32,56 @@ var app = new Vue({
 				let item2 = exchanges.find(i2 => i2.id === item.id);
 				return item2 ? { ...item, ...item2 } : item;
 			});
+		},
+
+		updateChart: function() {
+			let exchanges = this.exchanges;
+			let data = [];
+			this.chart.colors.reset();
+			exchanges.forEach(exchange => {
+				data.push({
+					"name": exchange.name,
+					"sellPrice": exchange.sell,
+					"buyPrice": exchange.buy,
+					"color": this.chart.colors.next()
+				});
+			});
+
+			this.chart.data = data;
+		},
+
+		createChart: function() {
+			let labelColor = '#00ad5f';
+
+			let chart = am4core.create("chartdiv", am4charts.XYChart);
+
+			let categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+			categoryAxis.dataFields.category = "name";
+			categoryAxis.renderer.inversed = true;
+			categoryAxis.renderer.grid.template.location = 0;
+			categoryAxis.renderer.labels.template.fill = am4core.color(labelColor);
+
+			let valueAxis = chart.xAxes.push(new am4charts.ValueAxis());
+			valueAxis.renderer.labels.template.fill = am4core.color(labelColor);
+
+			let columnSeries = chart.series.push(new am4charts.ColumnSeries());
+			columnSeries.dataFields.categoryY = "name";
+			columnSeries.dataFields.valueX = "buyPrice";
+			columnSeries.dataFields.openValueX = "sellPrice";
+			columnSeries.columns.template.tooltipText = "[bold]{categoryY}[/]\nSell at {openValueX} IRT\nBuy at {valueX} IRT";
+			
+
+			let columnTemplate = columnSeries.columns.template;
+			columnTemplate.strokeOpacity = 0;
+			columnTemplate.propertyFields.fill = "color";
+			columnTemplate.height = am4core.percent(100);
+
+			this.chart = chart;
 		}
 	}
 });
 
-
+// Template
 (function ($) {
 	"use strict";
 	$('.column100').on('mouseover',function(){
