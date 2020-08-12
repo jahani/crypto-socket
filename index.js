@@ -10,7 +10,7 @@ const HOST = '0.0.0.0';
 var exchanges = new (require('./models/Exchanges.js'))();
 
 server.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+console.log(`Running on ${HOST}:${PORT}`);
 
 app.use('/', express.static(__dirname + '/public'));
 
