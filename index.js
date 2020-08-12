@@ -23,7 +23,7 @@ var connectionsCount = 0;
 
 io.on('connection', function (socket) {
 
-    io.emit('exchanges.list', exchanges.list );
+    socket.emit('exchanges.list', exchanges.list );
 
     connectionsCount++;
     io.emit('connections.count', connectionsCount);
