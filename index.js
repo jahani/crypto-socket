@@ -19,10 +19,20 @@ app.get('/', function(request, response) {
 })
 
 
+var connectionsCount = 0;
+
 io.on('connection', function (socket) {
 
     io.emit('exchanges.list', exchanges.list );
 
+    connectionsCount++;
+    io.emit('connections.count', connectionsCount);
+
+    socket.on('disconnect', (reason) => {
+        connectionsCount--;
+        io.emit('connections.count', connectionsCount);
+    });
+    
 })
 
 setInterval(() => exchanges.broadcastPrices(io, 'exchanges.price'), 3100);

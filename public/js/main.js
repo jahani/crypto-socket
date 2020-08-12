@@ -1,5 +1,5 @@
 // amCharts
-am4core.useTheme(am4themes_animated);
+// am4core.useTheme(am4themes_animated);
 
 // Socket + VueJS
 var socket = io();
@@ -8,7 +8,8 @@ var app = new Vue({
 	el: '#app',
 
 	data: {
-		exchanges: []
+		exchanges: [],
+		connectionsCount: 0,
 	},
 
 	mounted: function() {
@@ -19,9 +20,13 @@ var app = new Vue({
 			this.exchanges = exchanges;
 		}.bind(this));
 
-		socket.on('exchanges.price', function(exchanges) {		
+		socket.on('exchanges.price', function(exchanges) {
 			this.updatePrices(exchanges);
 			this.updateChart();
+		}.bind(this));
+
+		socket.on('connections.count', function(connectionsCount) {
+			this.connectionsCount = connectionsCount;
 		}.bind(this));
 
 	},
