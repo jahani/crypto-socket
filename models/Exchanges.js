@@ -2,7 +2,7 @@ const glob = require( 'glob' );
 const path = require( 'path' );
 
 // Constant Variables
-const exchangesPathPattern = './models/exchanges/*Exchange.js';
+const exchangesPathPattern = path.join(__dirname, 'exchanges/*Exchange.js');
 
 class Exchanges {
 
