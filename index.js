@@ -7,15 +7,19 @@ var io = require('socket.io')(server);
 const PORT = 3000;
 const HOST = '0.0.0.0';
 
+const options = {
+    publicPath: __dirname + '/public',
+};
+
 var exchanges = new (require('./models/Exchanges.js'))();
 
 server.listen(PORT, HOST);
 console.log(`Running on ${HOST}:${PORT}`);
 
-app.use('/', express.static(__dirname + '/public'));
+app.use('/', express.static(options.publicPath));
 
 app.get('/', function(request, response) {
-    response.sendFile(__dirname + '/public/index.html');
+    response.sendFile(options.publicPath + '/index.html');
 })
 
 
