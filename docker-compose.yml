@@ -9,7 +9,7 @@ services:
     build: .
     restart: unless-stopped     # or "always"
     labels:
-      - "traefik.http.routers.crypto-socket.rule=Host(`exchange.cryptopia.ir`, `cryptochange.ir`)"
+      - "traefik.http.routers.crypto-socket.rule=Host(`cryptochange.ir`, `www.cryptochange.ir`)"
       - "traefik.http.routers.crypto-socket.entrypoints=websecure"
       - "traefik.http.routers.crypto-socket.tls=true"
       - "traefik.http.routers.crypto-socket.tls.certresolver=leresolver"
