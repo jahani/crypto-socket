@@ -9,7 +9,8 @@ class WallexExchange extends BaseExchange {
     static Data() {
         return {
             name: 'Wallex',
-            link: 'https://cryptopia.ir/go/wallex'
+            link: 'https://cryptopia.ir/go/wallex',
+            logo: 'wallex152.png',
         }
     }
 

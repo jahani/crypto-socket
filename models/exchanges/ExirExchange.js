@@ -9,7 +9,8 @@ class ExirExchange extends BaseExchange {
     static Data() {
         return {
             name: 'Exir',
-            link: 'https://cryptopia.ir/go/exir'
+            link: 'https://cryptopia.ir/go/exir',
+            logo: 'exir192.png',
         }
     }
 
