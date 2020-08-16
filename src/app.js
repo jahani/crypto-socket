@@ -21,16 +21,16 @@ var connectionsCount = 0;
 
 io.on('connection', function (socket) {
 
-    socket.emit('exchanges.list', exchanges.list );
+    socket.emit( config.socket.room.exchangesList , exchanges.list );
 
     connectionsCount++;
-    io.emit('connections.count', connectionsCount);
+    io.emit( config.socket.room.connectionsCount , connectionsCount);
 
     socket.on('disconnect', (reason) => {
         connectionsCount--;
-        io.emit('connections.count', connectionsCount);
+        io.emit( config.socket.room.connectionsCount , connectionsCount);
     });
     
 })
 
-setInterval(() => exchanges.broadcastPrices(io, 'exchanges.price'), 3100);
+setInterval(() => exchanges.broadcastPrices(io,  config.socket.room.exchangesPrice ), 3100);
