@@ -10,6 +10,7 @@ var app = new Vue({
 	data: {
 		exchanges: [],
 		connectionsCount: 0,
+		loaded: false,
 	},
 
 	mounted: function() {
@@ -18,6 +19,7 @@ var app = new Vue({
 
 		socket.on('exchanges.list', function(exchanges) {
 			this.exchanges = exchanges;
+			this.loaded = true
 		}.bind(this));
 
 		socket.on('exchanges.price', function(exchanges) {

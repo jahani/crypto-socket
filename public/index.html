@@ -53,8 +53,11 @@
 
 	<div class="bg-image"></div>
 	
-	<div class="limiter" id="app">
-		<div class="container-table100">
+	<div class="limiter" id="app" v-cloak>
+		<div class="container-table100" v-show="!loaded">
+			<p class="white-text">Please relaod this page if nothing pops up here instead of me :)</p>
+		</div>
+		<div class="container-table100" v-show="loaded">
 			<h1 class="white-text">Iran Local Exchanges Bitcoin Price</h1>
 			<div class="wrap-table100">
 

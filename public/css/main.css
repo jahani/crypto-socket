@@ -1,5 +1,9 @@
 /*//////////////////////////////////////////////////////////////////
 [ CUSTOM STYLES ]*/
+/** VueJS Hide by default **/
+[v-cloak] { display: none; }
+
+
 .white-text {
   color: white;
 }
