@@ -1,8 +1,12 @@
-https://stackoverflow.com/questions/48980380/returning-data-from-axios-api?rq=1
-https://stackoverflow.com/questions/48980380/returning-data-from-axios-api/48980526
+## Notes
+- https://tailwindcss.com/docs/table-layout
+- https://github.com/JscramblerBlog/Task-Manager-Client
+- https://github.com/JscramblerBlog/Task-Manager-Server
+- https://github.com/socketio/chat-example
 
+## ToDo
 Front: NUXT
-Back: Django
 
-https://github.com/socketio/chat-example
-
+## Alternative projects
+- https://mihanblockchain.com/exchange-prices/
+- https://tx.me/easybuyeasysell
