@@ -9,7 +9,8 @@ var app = new Vue({
 
 	data: {
 		options: {
-			chartRowHeight: 60, // Each row height in px
+			chartRowHeight: 43, // px
+			chartLabelHeight: 68, // px
 		},
 		exchanges: [],
 		connectionsCount: 0,
@@ -94,7 +95,7 @@ var app = new Vue({
 
 	computed: {
 		calcChartHeight: function() {
-			return this.exchanges.length*this.options.chartRowHeight;
+			return this.exchanges.length*this.options.chartRowHeight + this.options.chartLabelHeight;
 		},
 	},
 });
