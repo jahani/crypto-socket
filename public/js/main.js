@@ -8,9 +8,19 @@ var app = new Vue({
 	el: '#app',
 
 	data: {
-		options: {
+		config: {
+			// Chart settings
 			chartRowHeight: 43, // px
 			chartLabelHeight: 68, // px
+
+			// Shared socket messages pattern
+			socket: {
+				room: {
+					exchangesList: 'exchanges.list',
+					exchangesPrice: 'exchanges.price',
+					connectionsCount: 'connections.count',
+				}
+			}
 		},
 		exchanges: [],
 		connectionsCount: 0,
@@ -21,17 +31,17 @@ var app = new Vue({
 
 		this.createChart();
 
-		socket.on('exchanges.list', function(exchanges) {
+		socket.on( this.config.socket.room.exchangesList , function(exchanges) {
 			this.exchanges = exchanges;
 			this.loaded = true
 		}.bind(this));
 
-		socket.on('exchanges.price', function(exchanges) {
+		socket.on( this.config.socket.room.exchangesPrice , function(exchanges) {
 			this.updatePrices(exchanges);
 			this.updateChart();
 		}.bind(this));
 
-		socket.on('connections.count', function(connectionsCount) {
+		socket.on( this.config.socket.room.connectionsCount , function(connectionsCount) {
 			this.connectionsCount = connectionsCount;
 		}.bind(this));
 
@@ -95,7 +105,7 @@ var app = new Vue({
 
 	computed: {
 		calcChartHeight: function() {
-			return this.exchanges.length*this.options.chartRowHeight + this.options.chartLabelHeight;
+			return this.exchanges.length*this.config.chartRowHeight + this.config.chartLabelHeight;
 		},
 	},
 });
