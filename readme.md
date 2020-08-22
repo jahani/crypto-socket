@@ -8,5 +8,6 @@
 Front: NUXT
 
 ## Alternative projects
+- https://cryptonet.techjindal.com
 - https://mihanblockchain.com/exchange-prices/
 - https://tx.me/easybuyeasysell
