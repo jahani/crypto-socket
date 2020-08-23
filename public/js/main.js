@@ -111,6 +111,7 @@ var app = new Vue({
 
 	filters: {
 		priceIRT: function(value) {
+			if (!value) return '-';
 			return Number(value).toLocaleString() + ' IRT';
 		}
 	}
