@@ -108,6 +108,12 @@ var app = new Vue({
 			return this.exchanges.length*this.config.chartRowHeight + this.config.chartLabelHeight;
 		},
 	},
+
+	filters: {
+		priceIRT: function(value) {
+			return Number(value).toLocaleString() + ' IRT';
+		}
+	}
 });
 
 // Template
