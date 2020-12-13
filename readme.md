@@ -5,7 +5,7 @@
 - https://github.com/socketio/chat-example
 
 ## ToDo
-Front: NUXT
+- Front: NUXT
 
 ## Alternative projects
 - https://cryptonet.techjindal.com
