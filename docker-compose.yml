@@ -14,3 +14,6 @@ services:
       - "traefik.http.routers.crypto-socket.tls=true"
       - "traefik.http.routers.crypto-socket.tls.certresolver=leresolver"
       - "traefik.port=3000"
+    logging:
+      options:
+        max-size: 50m
