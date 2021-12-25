@@ -7,6 +7,9 @@ module.exports = {
 
     publicPath: __dirname + '/../public',
 
+    // Exchanges data update interval (miliseconds)
+    exchangesUpdateInterval: 3100,
+
     // Shared socket messages pattern
     socket: {
         room: {

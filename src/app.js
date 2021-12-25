@@ -33,4 +33,7 @@ io.on('connection', function (socket) {
     
 })
 
-setInterval(() => exchanges.broadcastPrices(io,  config.socket.room.exchangesPrice ), 3100);
+setInterval( () => 
+        exchanges.broadcastPrices(io,  config.socket.room.exchangesPrice),
+        config.exchangesUpdateInterval
+);
