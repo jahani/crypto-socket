@@ -159,10 +159,10 @@ var app = new Vue({
 					break;
 			}
 			
-			data.USD = Number( data.BTC * this.globalPrice ).toFixed(2);
+			data.USD = Number( data.BTC * this.globalPrice ).toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			data.IRT = Number( Math.round( data.BTC * this.localPrice ) ).toLocaleString();
 			data.SAT = Number( Math.round( data.BTC * 100_000_000 ) ).toLocaleString();
-			data.BTC = Number( data.BTC ).toFixed(8);
+			data.BTC = Number( data.BTC ).toFixed(8).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			
 			// Overwrite original values
 			Object.entries(data).forEach(([key, val]) => {
@@ -170,17 +170,9 @@ var app = new Vue({
 				// Input field format
 				if (this.calc.selected == key) {
 					// Remove commas
-					val = Number(this.calc.units[key].replace(/,/g, ''));
+					val = this.calc.units[key].replace(/,/g, '');
 					// Add commas
 					val = val.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-					// Add dot if omitted
-					if (this.calc.units[key].endsWith('.')) {
-						val = val + "."
-					}
-					// Keep empty if it is and don't change to zero
-					if (this.calc.units[key] == '') {
-						val = '';
-					}
 				}
 				
 				this.calc.units[key] = val;
