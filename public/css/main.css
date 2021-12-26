@@ -13,6 +13,28 @@
   padding-right: 10px;
 }
 
+.cell-pad {
+  padding: 0 25px;
+  text-align: center;
+}
+.table100 .head-input {
+  width: 120px;
+  display: inline-block;
+  color: #00ad5f;
+  background-color: #222222;
+  border-radius: 5px;
+  padding: 0 5px;
+}
+.head-input.selected {
+  background-color: #393939;
+}
+
+.table100-foot th {
+  background-color: #222222 !important;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
 
 /*//////////////////////////////////////////////////////////////////
 [ amChart STYLES ]*/

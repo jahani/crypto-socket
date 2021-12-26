@@ -66,7 +66,7 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column1">Exchange {{ globalPrice | priceRoundUSD }}</th>
+									<th class="cell100 column1">Exchange</th>
 									<th class="cell100 column2">BTC Sell Price</th>
 									<th class="cell100 column3">BTC Buy Price</th>
 								</tr>
@@ -94,11 +94,25 @@
 					<div class="table100-body js-pscroll">
 						<div id="chartdiv" v-bind:style="{height: calcChartHeight + 'px'}"></div>
 					</div>
+					
+					<div class="table100-foot js-pscroll">
+						<table>
+							<tbody>
+								<tr class="row100 head">
+									<th v-for="(unit, name, index) in calc.units" :key="`unit-${name}`"
+										:id="`unit-${name}`" class="cell100 cell-pad">
+										<input class="head-input" type="text"
+											v-bind:class = "(calc.selected == name)?'selected':''"
+											v-model="calc.units[name]" @focus="calcInput(name); $event.target.select()"
+											@input="calcInput(name)"> {{ name }}
+									</th>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
 				</div>
-
-			</div>
-
-			<div class="wrap-table100">
+				
 
 			</div>
 		</div>

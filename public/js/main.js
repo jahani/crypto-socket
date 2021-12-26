@@ -24,8 +24,18 @@ var app = new Vue({
 				}
 			}
 		},
+		calc: {
+			units: {
+				USD: "-",
+				BTC: "1",
+				IRT: "-",
+				SAT: "-",
+			},
+			selected: "BTC"
+		},
 		exchanges: [],
 		globalPrice: 0,
+		localPrice: 0,
 		connectionsCount: 0,
 		loaded: false,
 	},
@@ -46,6 +56,7 @@ var app = new Vue({
 
 		socket.on( this.config.socket.room.globalExchangesPrice , function(exchanges) {
 			this.updateGlobalPrices(exchanges);
+			this.calcUpdate();
 		}.bind(this));
 
 		socket.on( this.config.socket.room.connectionsCount , function(connectionsCount) {
@@ -56,6 +67,15 @@ var app = new Vue({
 
 	methods: {
 		updatePrices: function(exchanges) {
+
+			// Update localPrice
+			// TODO: Magic number usage
+			let exchange = exchanges[0];
+			if (exchange.id == 1) {
+				this.localPrice = Math.round( (exchange.buy+exchange.sell)/2 );
+			}
+
+			// Update prices
 			this.exchanges = this.exchanges.map(item => {
 				let item2 = exchanges.find(i2 => i2.id === item.id);
 				return item2 ? { ...item, ...item2 } : item;
@@ -111,7 +131,59 @@ var app = new Vue({
 			columnTemplate.height = am4core.percent(100);
 
 			this.chart = chart;
-		}
+		},
+
+		calcInput: function(unitName) {
+			this.calc.selected = unitName;
+			this.calcUpdate();
+		},
+
+		calcUpdate: function() {
+
+			// Make a local copy
+			let data = {...this.calc.units};
+			Object.entries(data).forEach(([key, val]) => {
+				data[key] = Number(val.replace(/,/g, ''));
+			});
+
+			// Calculate
+			switch(this.calc.selected) {
+				case 'USD':
+					data.BTC = data.USD / this.globalPrice;
+					break;
+				case 'IRT':
+					data.BTC = data.IRT / this.localPrice;
+					break;
+				case 'SAT':
+					data.BTC = data.SAT / 100_000_000;
+					break;
+			}
+			
+			data.USD = Number( data.BTC * this.globalPrice ).toFixed(2);
+			data.IRT = Number( Math.round( data.BTC * this.localPrice ) ).toLocaleString();
+			data.SAT = Number( Math.round( data.BTC * 100_000_000 ) ).toLocaleString();
+			data.BTC = Number( data.BTC ).toFixed(8);
+			
+			// Overwrite original values
+			Object.entries(data).forEach(([key, val]) => {
+
+				// Input field format
+				if (this.calc.selected == key) {
+					// Remove commas
+					val = Number(this.calc.units[key].replace(/,/g, ''));
+					// Add commas
+					val = val.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+					// Add dot if omitted
+					if (this.calc.units[key].endsWith('.')) {
+						val = val + "."
+					}
+				}
+				
+				this.calc.units[key] = val;
+			});
+
+		},
+
 	},
 
 	computed: {
