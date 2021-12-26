@@ -177,6 +177,10 @@ var app = new Vue({
 					if (this.calc.units[key].endsWith('.')) {
 						val = val + "."
 					}
+					// Keep empty if it is and don't change to zero
+					if (this.calc.units[key] == '') {
+						val = '';
+					}
 				}
 				
 				this.calc.units[key] = val;
