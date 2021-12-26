@@ -6,6 +6,7 @@ var io = require('socket.io')(server);
 const config = require('./config.js');
 
 var exchanges = new (require('./models/Exchanges.js'))();
+var globalExchanges = new (require('./models/GlobalExchanges.js'))();
 
 server.listen(config.server.port, config.server.host);
 console.log(`Running on ${config.server.host}:${config.server.port}`);
@@ -22,6 +23,7 @@ var connectionsCount = 0;
 io.on('connection', function (socket) {
 
     socket.emit( config.socket.room.exchangesList , exchanges.list );
+    socket.emit( config.socket.room.globalExchangesList , globalExchanges.list );
 
     connectionsCount++;
     io.emit( config.socket.room.connectionsCount , connectionsCount);
@@ -34,6 +36,9 @@ io.on('connection', function (socket) {
 })
 
 setInterval( () => 
-        exchanges.broadcastPrices(io,  config.socket.room.exchangesPrice),
-        config.exchangesUpdateInterval
+        {
+            exchanges.broadcastPrices(io,  config.socket.room.exchangesPrice),
+            globalExchanges.broadcastPrices(io,  config.socket.room.globalExchangesPrice)
+        }
+        , config.exchangesUpdateInterval
 );

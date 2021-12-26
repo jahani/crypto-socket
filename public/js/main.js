@@ -18,11 +18,14 @@ var app = new Vue({
 				room: {
 					exchangesList: 'exchanges.list',
 					exchangesPrice: 'exchanges.price',
+					globalExchangesList: 'globalExchanges.list',
+            		globalExchangesPrice: 'globalExchanges.price',
 					connectionsCount: 'connections.count',
 				}
 			}
 		},
 		exchanges: [],
+		globalPrice: 0,
 		connectionsCount: 0,
 		loaded: false,
 	},
@@ -41,6 +44,10 @@ var app = new Vue({
 			this.updateChart();
 		}.bind(this));
 
+		socket.on( this.config.socket.room.globalExchangesPrice , function(exchanges) {
+			this.updateGlobalPrices(exchanges);
+		}.bind(this));
+
 		socket.on( this.config.socket.room.connectionsCount , function(connectionsCount) {
 			this.connectionsCount = connectionsCount;
 		}.bind(this));
@@ -53,6 +60,10 @@ var app = new Vue({
 				let item2 = exchanges.find(i2 => i2.id === item.id);
 				return item2 ? { ...item, ...item2 } : item;
 			});
+		},
+
+		updateGlobalPrices: function(exchanges) {
+			this.globalPrice = exchanges[0].price
 		},
 
 		updateChart: function() {
@@ -113,6 +124,14 @@ var app = new Vue({
 		priceIRT: function(value) {
 			if (!value) return '-';
 			return Number(value).toLocaleString() + ' IRT';
+		},
+		priceUSD: function(value) {
+			if (!value) return '-';
+			return '$' + Number(Math.round(value)).toLocaleString();
+		},
+		priceRoundUSD: function(value) {
+			if (!value) return '';
+			return '$' + Number(Math.round(value/1000)).toLocaleString() + 'K';
 		}
 	}
 });

@@ -15,6 +15,8 @@ module.exports = {
         room: {
             exchangesList: 'exchanges.list',
             exchangesPrice: 'exchanges.price',
+            globalExchangesList: 'globalExchanges.list',
+            globalExchangesPrice: 'globalExchanges.price',
             connectionsCount: 'connections.count',
         }
     }
