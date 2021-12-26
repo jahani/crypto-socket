@@ -22,6 +22,8 @@
   display: inline-block;
   color: #00ad5f;
   background-color: #393939;
+  border-color: #222222;
+  border: #222222 solid 1px !important;
   border-radius: 5px;
   padding: 0 5px;
 }
