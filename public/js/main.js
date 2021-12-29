@@ -52,6 +52,7 @@ var app = new Vue({
 		socket.on( this.config.socket.room.exchangesPrice , function(exchanges) {
 			this.updatePrices(exchanges);
 			this.updateChart();
+			this.calcUpdate();
 		}.bind(this));
 
 		socket.on( this.config.socket.room.globalExchangesPrice , function(exchanges) {
