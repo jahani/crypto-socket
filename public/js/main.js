@@ -26,7 +26,7 @@ var app = new Vue({
 		},
 		calc: {
 			units: {
-				USD: "-",
+				USDT: "-",
 				BTC: "1",
 				IRT: "-",
 				SAT: "-",
@@ -149,8 +149,8 @@ var app = new Vue({
 
 			// Calculate
 			switch(this.calc.selected) {
-				case 'USD':
-					data.BTC = data.USD / this.globalPrice;
+				case 'USDT':
+					data.BTC = data.USDT / this.globalPrice;
 					break;
 				case 'IRT':
 					data.BTC = data.IRT / this.localPrice;
@@ -160,7 +160,7 @@ var app = new Vue({
 					break;
 			}
 			
-			data.USD = Number( data.BTC * this.globalPrice ).toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+			data.USDT = Number( data.BTC * this.globalPrice ).toFixed(2).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 			data.IRT = Number( Math.round( data.BTC * this.localPrice ) ).toLocaleString();
 			data.SAT = Number( Math.round( data.BTC * 100_000_000 ) ).toLocaleString();
 			data.BTC = Number( data.BTC ).toFixed(8).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
@@ -194,14 +194,6 @@ var app = new Vue({
 			if (!value) return '-';
 			return Number(value).toLocaleString() + ' IRT';
 		},
-		priceUSD: function(value) {
-			if (!value) return '-';
-			return '$' + Number(Math.round(value)).toLocaleString();
-		},
-		priceRoundUSD: function(value) {
-			if (!value) return '';
-			return '$' + Number(Math.round(value/1000)).toLocaleString() + 'K';
-		}
 	}
 });
 
