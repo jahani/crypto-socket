@@ -31,7 +31,9 @@
   background-color: #222222;
 }
 
-
+.text-center {
+  text-align: center;
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ amChart STYLES ]*/
@@ -243,10 +245,10 @@ table {
 
 th, td {
   font-weight: unset;
-  padding-right: 10px;
+  padding: 0 5px;
 }
 
-.column1 {
+/* .column1 {
   width: 33%;
   padding-left: 40px;
 }
@@ -265,7 +267,7 @@ th, td {
 
 .column5 {
   width: 13%;
-}
+} */
 
 .table100-head th {
   padding-top: 18px;

@@ -67,10 +67,11 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column1">Exchange</th>
-									<th class="cell100 column2">BTC Bid Price</th>
-									<th class="cell100 column3">BTC Ask Price</th>
-									<th class="cell100 column4">Volume</th>
+									<th class="cell100 text-center">LN</th>
+									<th class="cell100">Exchange</th>
+									<th class="cell100">BTC Bid Price</th>
+									<th class="cell100">BTC Ask Price</th>
+									<th class="cell100">Volume</th>
 								</tr>
 							</thead>
 						</table>
@@ -81,13 +82,16 @@
 							<tbody>
 
 								<tr v-for="exchange in exchanges" :key="`exchange-${exchange.id}`" :id="`exchange-${exchange.id}`">
-									<td class="cell100 column1">
+									<td class="cell100 text-center">
+										<span class="lightning" v-if="exchange.lightning">⚡</span>
+									</td>
+									<td class="cell100">
 										<img :src="`images/exchanges_logo/${exchange.logo}`" class="img-fluid logo" alt="Logo">
 										<a :href="exchange.link" target="_blank">{{ exchange.name }}</a>
 									</td>
-									<td class="cell100 column2">{{ exchange.bid | priceIRT }}</td>
-									<td class="cell100 column3">{{ exchange.ask | priceIRT}}</td>
-									<td class="cell100 column3">{{ exchange.volume | priceMIRT}}</td>
+									<td class="cell100">{{ exchange.bid | priceIRT }}</td>
+									<td class="cell100">{{ exchange.ask | priceIRT}}</td>
+									<td class="cell100">{{ exchange.volume | priceMIRT}}</td>
 								</tr>
 
 							</tbody>

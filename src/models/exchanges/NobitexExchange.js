@@ -14,6 +14,7 @@ class NobitexExchange extends BaseExchange {
             name: 'Nobitex',
             link: 'https://cryptopia.ir/go/nobitex-cryptochange',
             logo: 'nobitex81.png',
+            lightning: true,
         }
     }
 
