@@ -28,11 +28,11 @@ class ExirExchange extends BaseExchange {
     }
 
     static BestPrice(data) {
-        let buy = parseInt(data['btc-irt'].asks[0][0]);
-        let sell = parseInt(data['btc-irt'].bids[0][0]);
+        let ask = parseInt(data['btc-irt'].asks[0][0]);
+        let bid = parseInt(data['btc-irt'].bids[0][0]);
         return {
-            buy: buy,
-            sell: sell
+            ask: ask,
+            bid: bid
         };
     }
 

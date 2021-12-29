@@ -28,11 +28,11 @@ class ArzpayaExchange extends BaseExchange {
     }
 
     static BestPrice(data) {
-        let buy = parseInt(data.BTCIR.SellPrice);
-        let sell = parseInt(data.BTCIR.BuyPrice);
+        let ask = parseInt(data.BTCIR.SellPrice);
+        let bid = parseInt(data.BTCIR.BuyPrice);
         return {
-            buy: buy,
-            sell: sell
+            ask: ask,
+            bid: bid
         };
     }
 

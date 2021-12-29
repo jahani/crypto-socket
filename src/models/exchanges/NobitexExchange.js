@@ -2,10 +2,12 @@ const BaseExchange = require('../BaseExchange.js')
 
 const axios = require('axios');
 
+// https://apidocs.nobitex.ir/#3fe8d57657
+const url = 'https://api.nobitex.ir/v2/orderbook/BTCIRT';
+
+
 class NobitexExchange extends BaseExchange {
     
-    // https://apidocs.nobitex.ir/#3fe8d57657
-
     static Data() {
         return {
             name: 'Nobitex',
@@ -16,9 +18,7 @@ class NobitexExchange extends BaseExchange {
 
     static FetchPrice() {
 
-        return axios.post('https://api.nobitex.ir/v2/orderbook', {
-            symbol: 'BTCIRT'
-        })
+        return axios.get(url)
         .then((res) => {
             if (res.status != 200) {
                 throw (`statusCode: ${res.status}`);
@@ -33,11 +33,11 @@ class NobitexExchange extends BaseExchange {
     }
     
     static BestPrice(data) {
-        let buy = parseInt(Number(data.bids[0][0])/10);
-        let sell = parseInt(Number(data.asks[0][0])/10);
+        let ask = parseInt(Number(data.bids[0][0])/10);
+        let bid = parseInt(Number(data.asks[0][0])/10);
         return {
-            buy: buy,
-            sell: sell
+            ask: ask,
+            bid: bid
         };
     }
 

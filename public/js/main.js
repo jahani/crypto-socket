@@ -73,7 +73,7 @@ var app = new Vue({
 			// TODO: Magic number usage
 			let exchange = exchanges[0];
 			if (exchange.id == 1) {
-				this.localPrice = Math.round( (exchange.buy+exchange.sell)/2 );
+				this.localPrice = Math.round( (exchange.ask+exchange.bid)/2 );
 			}
 
 			// Update prices
@@ -94,8 +94,8 @@ var app = new Vue({
 			exchanges.forEach(exchange => {
 				data.push({
 					"name": exchange.name,
-					"sellPrice": exchange.sell,
-					"buyPrice": exchange.buy,
+					"bid": exchange.bid,
+					"ask": exchange.ask,
 					"color": this.chart.colors.next()
 				});
 			});
@@ -121,8 +121,8 @@ var app = new Vue({
 
 			let columnSeries = chart.series.push(new am4charts.ColumnSeries());
 			columnSeries.dataFields.categoryY = "name";
-			columnSeries.dataFields.valueX = "buyPrice";
-			columnSeries.dataFields.openValueX = "sellPrice";
+			columnSeries.dataFields.valueX = "ask";
+			columnSeries.dataFields.openValueX = "bid";
 			columnSeries.columns.template.tooltipText = "[bold]{categoryY}[/]\nSell at {openValueX} IRT\nBuy at {valueX} IRT";
 			
 

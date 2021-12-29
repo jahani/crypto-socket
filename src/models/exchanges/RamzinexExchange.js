@@ -34,11 +34,11 @@ class RamzinexExchange extends BaseExchange {
     }
 
     static BestPrice(data) {
-        let buy = parseInt(data.data.sell/10);
-        let sell = parseInt(data.data.buy/10);
+        let ask = parseInt(data.data.sell/10);
+        let bid = parseInt(data.data.buy/10);
         return {
-            buy: buy,
-            sell: sell
+            ask: ask,
+            bid: bid
         };
     }
 

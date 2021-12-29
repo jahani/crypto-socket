@@ -32,15 +32,15 @@ class OkexExchange extends BaseExchange {
         .then((html) => {
             
             console.log(html);
-            let buy = $('#intro-step-3 > a:nth-child(1) > div:nth-child(2) > span', html).text();
-            let sell = $('#intro-step-4 > a:nth-child(1) > div:nth-child(2) > span', html).text();
+            let ask = $('#intro-step-3 > a:nth-child(1) > div:nth-child(2) > span', html).text();
+            let bid = $('#intro-step-4 > a:nth-child(1) > div:nth-child(2) > span', html).text();
 
-            buy = buy.trim().split(',').join('');
-            sell = sell.trim().split(',').join('');
+            ask = ask.trim().split(',').join('');
+            bid = bid.trim().split(',').join('');
 
             return {
-                buy: parseInt(buy),
-                sell: parseInt(sell)
+                ask: parseInt(ask),
+                bid: parseInt(bid)
             };
         });
 

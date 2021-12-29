@@ -34,11 +34,11 @@ class WallexExchange extends BaseExchange {
 
     static BestPrice(data) {
         let priceData = data.result.symbols["BTC-TMN"].stats;
-        let buy = parseInt(priceData.askPrice);
-        let sell = parseInt(priceData.bidPrice);
+        let ask = parseInt(priceData.askPrice);
+        let bid = parseInt(priceData.bidPrice);
         return {
-            buy: buy,
-            sell: sell
+            ask: ask,
+            bid: bid
         };
     }
 
