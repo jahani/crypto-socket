@@ -207,9 +207,9 @@ var app = new Vue({
 			if (!value) return '-';
 			return Number(Math.round(value/10**6)).toLocaleString() + 'M IRT';
 		},
-		priceBTC: function(value) {
+		priceBTC5: function(value) {
 			if (!value) return '-';
-			return Number( value ).toFixed(8).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + ' BTC';
+			return Number( value ).toFixed(5).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + ' BTC';
 		}
 	}
 });
