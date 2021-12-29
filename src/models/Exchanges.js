@@ -11,16 +11,30 @@ class Exchanges {
         this.list = this.constructor.GetData( this.classes );
     }
 
-    // Fetch and broadcast prices over socket.io server instance
+    // Broadcast prices
     broadcastPrices(io, room) {
+
+        this.broadcastCustomMethod(io, room, 'FetchPrice');
+    
+    }
+
+    // Broadcast volumes
+    broadcastVolumes(io, room) {
+
+        this.broadcastCustomMethod(io, room, 'FetchVolume');
+    
+    }
+
+    // Fetch and broadcast exchanges defined method output over socket.io server instance
+    broadcastCustomMethod(io, room, method) {
 
         for (let key = 0; key < this.classes.length; key++) {
             let Exchange = this.classes[key];
             
             try {
-                Exchange.FetchPrice().then(prices => {
+                Exchange[method]().then(data => {
                     io.emit(room, [
-                        {...{id: key}, ...prices}
+                        {...{id: key}, ...data}
                     ]);
                 });
             } catch (error) {

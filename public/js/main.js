@@ -18,6 +18,7 @@ var app = new Vue({
 				room: {
 					exchangesList: 'exchanges.list',
 					exchangesPrice: 'exchanges.price',
+					exchangesVolume: 'exchanges.volume',
 					globalExchangesList: 'globalExchanges.list',
             		globalExchangesPrice: 'globalExchanges.price',
 					connectionsCount: 'connections.count',
@@ -50,14 +51,15 @@ var app = new Vue({
 		}.bind(this));
 
 		socket.on( this.config.socket.room.exchangesPrice , function(exchanges) {
-			this.updatePrices(exchanges);
-			this.updateChart();
-			this.calcUpdate();
+			this.updateExchangesData(exchanges);
+		}.bind(this));
+
+		socket.on( this.config.socket.room.exchangesVolume , function(exchanges) {
+			this.updateExchangesData(exchanges);
 		}.bind(this));
 
 		socket.on( this.config.socket.room.globalExchangesPrice , function(exchanges) {
 			this.updateGlobalPrices(exchanges);
-			this.calcUpdate();
 		}.bind(this));
 
 		socket.on( this.config.socket.room.connectionsCount , function(connectionsCount) {
@@ -67,7 +69,7 @@ var app = new Vue({
 	},
 
 	methods: {
-		updatePrices: function(exchanges) {
+		updateExchangesData: function(exchanges) {
 
 			// Update localPrice
 			// TODO: Magic number usage
@@ -76,15 +78,22 @@ var app = new Vue({
 				this.localPrice = Math.round( (exchange.ask+exchange.bid)/2 );
 			}
 
-			// Update prices
+			// Update prices or volumes
 			this.exchanges = this.exchanges.map(item => {
 				let item2 = exchanges.find(i2 => i2.id === item.id);
+				console.log(item2 ? { ...item, ...item2 } : item);
 				return item2 ? { ...item, ...item2 } : item;
 			});
+
+			this.updateChart();
+
 		},
 
 		updateGlobalPrices: function(exchanges) {
-			this.globalPrice = exchanges[0].price
+
+			this.globalPrice = exchanges[0].price;
+
+			this.updateConverter();
 		},
 
 		updateChart: function() {
@@ -136,10 +145,10 @@ var app = new Vue({
 
 		calcInput: function(unitName) {
 			this.calc.selected = unitName;
-			this.calcUpdate();
+			this.updateConverter();
 		},
 
-		calcUpdate: function() {
+		updateConverter: function() {
 
 			// Make a local copy
 			let data = {...this.calc.units};
@@ -193,6 +202,10 @@ var app = new Vue({
 		priceIRT: function(value) {
 			if (!value) return '-';
 			return Number(value).toLocaleString() + ' IRT';
+		},
+		priceMIRT: function(value) {
+			if (!value) return '-';
+			return Number(Math.round(value/10**6)).toLocaleString() + 'M IRT';
 		},
 	}
 });

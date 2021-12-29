@@ -3,7 +3,8 @@ const BaseExchange = require('../BaseExchange.js')
 const axios = require('axios');
 
 // https://apidocs.exir.io/#orderbook
-const url = 'https://api.exir.io/v1/orderbooks?symbol=btc-irt';
+const priceURL = 'https://api.exir.io/v1/orderbooks?symbol=btc-irt';
+const volumeURL = 'https://api.exir.io/v1/ticker?symbol=btc-irt';
 
 class ExirExchange extends BaseExchange {
 
@@ -17,13 +18,28 @@ class ExirExchange extends BaseExchange {
 
     static FetchPrice() {
         
-        return axios.get(url)
+        return axios.get(priceURL)
         .then((res) => {
             if (res.status != 200) {
                 throw (`statusCode: ${res.status}`);
             }
 
             return this.BestPrice(res.data);
+        });
+
+    }
+
+    static FetchVolume() {
+        
+        return axios.get(volumeURL)
+        .then((res) => {
+            if (res.status != 200) {
+                throw (`statusCode: ${res.status}`);
+            }
+
+            return {
+                volume: parseInt((res.data.volume)*10**9)
+            }
         });
 
     }

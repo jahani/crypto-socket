@@ -70,6 +70,7 @@
 									<th class="cell100 column1">Exchange</th>
 									<th class="cell100 column2">BTC Bid Price</th>
 									<th class="cell100 column3">BTC Ask Price</th>
+									<th class="cell100 column4">Volume</th>
 								</tr>
 							</thead>
 						</table>
@@ -86,6 +87,7 @@
 									</td>
 									<td class="cell100 column2">{{ exchange.bid | priceIRT }}</td>
 									<td class="cell100 column3">{{ exchange.ask | priceIRT}}</td>
+									<td class="cell100 column3">{{ exchange.volume | priceMIRT}}</td>
 								</tr>
 
 							</tbody>

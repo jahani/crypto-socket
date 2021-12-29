@@ -32,13 +32,18 @@ class WallexExchange extends BaseExchange {
 
     }
 
+    static FetchVolume() {
+        
+        return this.FetchPrice();
+
+    }
+
     static BestPrice(data) {
-        let priceData = data.result.symbols["BTC-TMN"].stats;
-        let ask = parseInt(priceData.askPrice);
-        let bid = parseInt(priceData.bidPrice);
+        let btcStats = data.result.symbols["BTC-TMN"].stats;
         return {
-            ask: ask,
-            bid: bid
+            ask: parseInt(btcStats.askPrice),
+            bid: parseInt(btcStats.bidPrice),
+            volume: parseInt(btcStats['24h_quoteVolume'])
         };
     }
 

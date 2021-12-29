@@ -40,5 +40,12 @@ setInterval( () =>
             exchanges.broadcastPrices(io,  config.socket.room.exchangesPrice),
             globalExchanges.broadcastPrices(io,  config.socket.room.globalExchangesPrice)
         }
-        , config.exchangesUpdateInterval
+        , config.intervals.price
+);
+
+setInterval( () =>
+        {
+            exchanges.broadcastVolumes(io,  config.socket.room.exchangesVolume)
+        }
+        , config.intervals.volume
 );

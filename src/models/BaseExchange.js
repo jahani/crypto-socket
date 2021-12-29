@@ -4,6 +4,8 @@ class BaseExchange {
 
     static FetchPrice() {}
 
+    static FetchVolume() {}
+
 }
 
 module.exports = BaseExchange
