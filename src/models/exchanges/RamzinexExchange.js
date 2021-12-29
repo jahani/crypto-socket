@@ -12,6 +12,7 @@ class RamzinexExchange extends BaseExchange {
             name: 'Ramzinex',
             link: 'https://cryptopia.ir/go/ramzinex',
             logo: 'ramzinex2x.png',
+            withdrawFee: 0.00050,
         }
     }
 

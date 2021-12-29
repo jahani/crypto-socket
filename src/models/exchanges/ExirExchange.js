@@ -13,6 +13,7 @@ class ExirExchange extends BaseExchange {
             name: 'Exir',
             link: 'https://cryptopia.ir/go/exir',
             logo: 'exir192.png',
+            withdrawFee: 0.0003,
         }
     }
 

@@ -15,6 +15,7 @@ class NobitexExchange extends BaseExchange {
             link: 'https://cryptopia.ir/go/nobitex-cryptochange',
             logo: 'nobitex81.png',
             lightning: true,
+            withdrawFee: 0.00035,
         }
     }
 

@@ -12,6 +12,7 @@ class WallexExchange extends BaseExchange {
             name: 'Wallex',
             link: 'https://cryptopia.ir/go/wallex',
             logo: 'wallex152.png',
+            withdrawFee: 0.0005,
         }
     }
 

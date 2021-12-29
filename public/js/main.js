@@ -207,6 +207,10 @@ var app = new Vue({
 			if (!value) return '-';
 			return Number(Math.round(value/10**6)).toLocaleString() + 'M IRT';
 		},
+		priceBTC: function(value) {
+			if (!value) return '-';
+			return Number( value ).toFixed(8).replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + ' BTC';
+		}
 	}
 });
 
