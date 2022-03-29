@@ -3,7 +3,7 @@ const BaseExchange = require('../BaseExchange.js')
 const axios = require('axios');
 
 // https://api-docs.wallex.ir
-const url = 'https://wallex.ir/api/v2/markets';
+const url = 'https://api.wallex.ir/v1/markets';
 
 class WallexExchange extends BaseExchange {
 
@@ -40,7 +40,7 @@ class WallexExchange extends BaseExchange {
     }
 
     static BestPrice(data) {
-        let btcStats = data.result.symbols["BTC-TMN"].stats;
+        let btcStats = data.result.symbols["BTCTMN"].stats;
         return {
             ask: parseInt(btcStats.askPrice),
             bid: parseInt(btcStats.bidPrice),
