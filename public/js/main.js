@@ -9,6 +9,10 @@ var app = new Vue({
 
 	data: {
 		config: {
+			// Chosen Exchange ID
+			// TODO: Magic number usage
+			selectedExchageID: 0,
+
 			// Chart settings
 			chartRowHeight: 43, // px
 			chartLabelHeight: 68, // px
@@ -72,9 +76,8 @@ var app = new Vue({
 		updateExchangesData: function(exchanges) {
 
 			// Update localPrice
-			// TODO: Magic number usage
 			let exchange = exchanges[0];
-			if (exchange.id == 1) {
+			if (exchange.id == this.config.selectedExchangeID) {
 				this.localPrice = Math.round( (exchange.ask+exchange.bid)/2 );
 			}
 
