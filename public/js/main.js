@@ -11,7 +11,7 @@ var app = new Vue({
 		config: {
 			// Chosen Exchange ID
 			// TODO: Magic number usage
-			selectedExchageID: 0,
+			selectedExchangeID: 0,
 
 			// Chart settings
 			chartRowHeight: 43, // px
