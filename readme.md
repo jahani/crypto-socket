@@ -1,7 +1,6 @@
 # Crypto Socket
 Iran Local Exchanges Bitcoin Price and Converter.
 ![Screen Capture](public/images/screencapture.png)
-*[Crypto Change Website](https://cryptochange.ir/)*
 
 ------------------
 
