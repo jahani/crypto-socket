@@ -7,7 +7,7 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.28.0",
     "cheerio": "^1.0.0-rc.3",
     "express": "^4.19.2",
     "glob": "^7.1.6",
